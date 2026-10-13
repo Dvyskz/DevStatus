@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Monitor local y página de estado para sitios web y APIs." />
+    <title>DevStatus — vigila lo que publicas</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <aside class="sidebar">
+      <a class="logo" href="#"><span>DS</span><strong>DevStatus</strong></a>
+      <nav aria-label="Navegación">
+        <a class="active" href="#overview"><span>⌁</span> Overview</a>
+        <a href="#monitors"><span>◫</span> Monitores</a>
+        <a href="#incidents"><span>!</span> Incidentes</a>
+      </nav>
+      <div class="sidebar-note"><span>LOCAL MODE</span><p>Los datos viven solamente en este navegador.</p></div>
+      <a class="profile" href="https://github.com/Dvyskz" target="_blank" rel="noreferrer"><i>Y</i><span>Yazid<small>@Dvyskz</small></span><b>↗</b></a>
+    </aside>
+
+    <main>
+      <header class="topbar">
+        <div><p>MONITOR DE SERVICIOS</p><h1>Buenas noches, Yazid.</h1></div>
+        <div class="top-actions"><span id="last-check">Sin revisar</span><button class="ghost" id="check-all">Revisar todo</button><button class="primary" id="open-add">+ Nuevo monitor</button></div>
+      </header>
+
+      <section id="overview" class="summary-grid">
+        <article class="summary main-summary"><span class="summary-icon ok">✓</span><div><small>ESTADO GENERAL</small><strong id="overall-label">Todo operativo</strong></div><b id="overall-count">0 / 0</b></article>
+        <article class="summary"><small>UPTIME PROMEDIO</small><strong id="uptime-value">100%</strong><span>últimas revisiones</span></article>
+        <article class="summary"><small>RESPUESTA MEDIA</small><strong id="response-value">—</strong><span>desde este dispositivo</span></article>
+      </section>
+
+      <section id="monitors" class="content-section">
+        <header class="section-title"><div><p>MONITORES</p><h2>Tus servicios.</h2></div><span id="monitor-count">0 endpoints</span></header>
+        <div class="monitor-list" id="monitor-list"></div>
+        <div class="empty-state" id="empty-state" hidden><span>＋</span><h3>Añade tu primer servicio</h3><p>DevStatus revisará si responde y guardará el historial localmente.</p><button class="primary" id="empty-add">Crear monitor</button></div>
+      </section>
+
+      <section id="incidents" class="content-section incidents-section">
+        <header class="section-title"><div><p>ACTIVIDAD</p><h2>Últimos eventos.</h2></div><button class="text-button" id="clear-events">Limpiar historial</button></header>
+        <div class="event-list" id="event-list"></div>
+      </section>
+    </main>
+
+    <dialog id="monitor-dialog">
+      <form id="monitor-form">
+        <header><div><small>NUEVO MONITOR</small><h2>¿Qué vigilamos?</h2></div><button type="button" id="close-dialog" aria-label="Cerrar">×</button></header>
+        <label>Nombre<input id="name-input" required maxlength="40" placeholder="Mi API" /></label>
+        <label>URL<input id="url-input" required type="url" placeholder="https://api.ejemplo.com/health" /></label>
+        <label>Tipo<select id="type-input"><option>Website</option><option>API</option><option>Radio stream</option></select></label>
+        <p>La versión estática hace revisiones desde tu navegador. Un backend puede convertirla en un monitor 24/7.</p>
+        <button class="primary full" type="submit">Añadir y revisar</button>
+      </form>
+    </dialog>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  </body>
+</html>
